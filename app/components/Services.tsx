@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -22,7 +23,14 @@ export default function Services() {
               className="rounded-2xl border border-slate-200 overflow-hidden"
             >
               <div className="relative w-full aspect-[4/3]">
-                <Image src={s.img} alt={s.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 33vw" />
+                <Image
+                  src={s.img}
+                  alt={s.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width:768px) 100vw, 33vw"
+                  priority={i === 0}
+                />
               </div>
               <div className="p-4 font-medium">{s.title}</div>
             </motion.div>
