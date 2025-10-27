@@ -14,20 +14,18 @@ export async function sendContactEmail(data: ContactPayload) {
     <p><strong>Mensaje:</strong><br/>${escapeHtml(data.message).replace(/\n/g, "<br/>")}</p>
   `;
 
-  // Opción 1: Resend
   if (RESEND_API_KEY) {
     const resend = new Resend(RESEND_API_KEY);
     const result = await resend.emails.send({
       from: "Grupo Handy <onboarding@resend.dev>",
       to: [CONTACT_TO],
       subject,
-      html
+      html,
     });
     if ((result as any)?.error) throw new Error((result as any).error.message || "Resend error");
     return result;
   }
 
-  // Opción 2: SMTP
   const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT || 587);
   const user = process.env.SMTP_USER;
@@ -39,13 +37,9 @@ export async function sendContactEmail(data: ContactPayload) {
     return { ok: true };
   }
 
-  // Ninguna opción configurada
   throw new Error("Configuración de correo no encontrada. Define RESEND_API_KEY o variables SMTP en Vercel.");
 }
 
 function escapeHtml(str: string) {
-  return str
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 }
