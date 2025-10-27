@@ -4,10 +4,12 @@ import { Button } from "./ui/button";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("loading");
+    setErrorMsg("");
     const form = new FormData(e.currentTarget);
     const payload = {
       name: String(form.get("name") || ""),
@@ -21,11 +23,13 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
-      if (!res.ok) throw new Error("Request failed");
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error || "Ocurrió un error al enviar el mensaje.");
       setStatus("ok");
       (e.currentTarget as HTMLFormElement).reset();
-    } catch {
+    } catch (err: any) {
       setStatus("error");
+      setErrorMsg(err?.message || "Ocurrió un error. Intenta de nuevo.");
     }
   }
 
@@ -46,9 +50,8 @@ export default function ContactForm() {
       <div className="flex items-center gap-3">
         <Button type="submit" disabled={status === "loading"}>Enviar</Button>
         {status === "ok" && <span className="text-green-700 text-sm">Enviado. ¡Te contactaremos pronto!</span>}
-        {status === "error" && <span className="text-red-600 text-sm">Ocurrió un error. Intenta de nuevo.</span>}
+        {status === "error" && <span className="text-red-600 text-sm">{errorMsg}</span>}
       </div>
-      {/* TODO: helper para enviar a Google Sheets con fetch a Apps Script */}
     </form>
   );
 }
