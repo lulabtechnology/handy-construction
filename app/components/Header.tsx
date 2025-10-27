@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
+import { getWhatsapp } from "../lib/whats";
 
 const NAV = [
   { href: "#inicio", label: "Inicio" },
@@ -16,6 +17,7 @@ const NAV = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const wa = getWhatsapp();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -23,9 +25,6 @@ export default function Header() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const wa = process.env.NEXT_PUBLIC_WHATSAPP || "67563200";
-  const waLink = `https://wa.me/507${wa}?text=Hola%20Grupo%20Handy%2C%20quisiera%20una%20evaluaci%C3%B3n%20gratuita`;
 
   return (
     <header
@@ -52,7 +51,7 @@ export default function Header() {
           <a href="#cta-final" className="hidden sm:block">
             <Button size="sm">Solicitar evaluación gratis</Button>
           </a>
-          <a href={waLink} target="_blank" rel="noopener noreferrer" className="hidden md:block">
+          <a href={wa.link} target="_blank" rel="noopener noreferrer" className="hidden md:block">
             <Button size="sm" variant="outline">WhatsApp</Button>
           </a>
           <button
@@ -87,7 +86,7 @@ export default function Header() {
               <a href="#cta-final" onClick={() => setOpen(false)}>
                 <Button size="sm" className="w-full">Evaluación gratis</Button>
               </a>
-              <a href={waLink} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
+              <a href={wa.link} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
                 <Button size="sm" variant="outline" className="w-full">WhatsApp</Button>
               </a>
             </div>
