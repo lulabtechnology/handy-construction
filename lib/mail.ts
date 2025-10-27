@@ -3,11 +3,10 @@ import nodemailer from "nodemailer";
 import type { ContactPayload } from "./validations";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-// si no pones CONTACT_TO en el env, enviará a esta dirección por defecto:
 const CONTACT_TO = process.env.CONTACT_TO || "Gerencia@handyconstructionsa.com";
 
 export async function sendContactEmail(data: ContactPayload) {
-  const subject = `Nueva consulta — Handy Construction S.A (${data.name})`;
+  const subject = `Nueva consulta — Grupo Handy (${data.name})`;
   const html = `
     <h2>Nuevo mensaje de contacto</h2>
     <p><strong>Nombre:</strong> ${escapeHtml(data.name)}</p>
@@ -15,25 +14,33 @@ export async function sendContactEmail(data: ContactPayload) {
     <p><strong>Mensaje:</strong><br/>${escapeHtml(data.message).replace(/\n/g, "<br/>")}</p>
   `;
 
+  // Opción 1: Resend
   if (RESEND_API_KEY) {
     const resend = new Resend(RESEND_API_KEY);
     const result = await resend.emails.send({
-      from: "Handy Construction <onboarding@resend.dev>",
+      from: "Grupo Handy <onboarding@resend.dev>",
       to: [CONTACT_TO],
       subject,
       html
     });
-    if (result.error) throw new Error(result.error.message || "Resend error");
+    if ((result as any)?.error) throw new Error((result as any).error.message || "Resend error");
     return result;
   }
 
-  // Fallback SMTP
-  const host = process.env.SMTP_HOST!;
+  // Opción 2: SMTP
+  const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT || 587);
-  const user = process.env.SMTP_USER!;
-  const pass = process.env.SMTP_PASS!;
-  const transporter = nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } });
-  await transporter.sendMail({ from: `"Handy Construction" <${user}>`, to: CONTACT_TO, subject, html });
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  if (host && user && pass) {
+    const transporter = nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } });
+    await transporter.sendMail({ from: `"Grupo Handy" <${user}>`, to: CONTACT_TO, subject, html });
+    return { ok: true };
+  }
+
+  // Ninguna opción configurada
+  throw new Error("Configuración de correo no encontrada. Define RESEND_API_KEY o variables SMTP en Vercel.");
 }
 
 function escapeHtml(str: string) {
