@@ -17,7 +17,7 @@ export default function Page() {
     <>
       <Header />
       <main>
-        <Hero />
+        <section id="inicio"><Hero /></section>
         <section id="servicios"><Services /></section>
         <section id="como-trabajamos"><HowItWorks /></section>
         <section id="capacitaciones"><Trainings /></section>
@@ -28,7 +28,7 @@ export default function Page() {
             <div>
               <h2 className="text-3xl md:text-4xl font-semibold text-brand">Contáctanos</h2>
               <p className="mt-3 text-slate-700">
-                Cuéntanos sobre tu proyecto. Respuesta rápida por WhatsApp:{" "}
+                Respuesta rápida por WhatsApp:{" "}
                 <a className="text-brand hover:underline" href={waLink} target="_blank" rel="noopener noreferrer">
                   +507 {wa}
                 </a>
