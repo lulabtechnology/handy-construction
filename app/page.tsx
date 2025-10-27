@@ -12,6 +12,9 @@ export default function Page() {
   const wa = process.env.NEXT_PUBLIC_WHATSAPP || "67563200";
   const waLink = `https://wa.me/507${wa}?text=Hola%20Handy%20Construction%2C%20quisiera%20una%20evaluaci%C3%B3n%20gratuita`;
 
+  // correo oficial
+  const email = process.env.CONTACT_TO || "Gerencia@handyconstructionsa.com";
+
   return (
     <>
       <Header />
@@ -43,7 +46,7 @@ export default function Page() {
               </p>
               <ul className="mt-4 text-sm text-slate-700 space-y-2">
                 <li><strong>WhatsApp:</strong> +507 {wa}</li>
-                <li><strong>Email:</strong> {process.env.CONTACT_TO ?? "mi-correo@dominio.com"}</li>
+                <li><strong>Email:</strong> {email}</li>
               </ul>
               <p className="mt-6 text-xs text-slate-600">
                 Razón social: HANDYCONSTRUCTIONS.A — RUC 1139405-1-569224 DV 40
