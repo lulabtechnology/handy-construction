@@ -25,7 +25,7 @@ export default function Header() {
   }, []);
 
   const wa = process.env.NEXT_PUBLIC_WHATSAPP || "67563200";
-  const waLink = `https://wa.me/507${wa}?text=Hola%20Handy%20Construction%2C%20quisiera%20una%20evaluaci%C3%B3n%20gratuita`;
+  const waLink = `https://wa.me/507${wa}?text=Hola%20Grupo%20Handy%2C%20quisiera%20una%20evaluaci%C3%B3n%20gratuita`;
 
   return (
     <header
@@ -39,13 +39,13 @@ export default function Header() {
         <Link href="#inicio" className="flex items-center gap-3">
           <Image
             src="/handy/logo.png"
-            alt="Handy Group"
+            alt="Grupo Handy"
             width={32}
             height={32}
             className="rounded"
             priority
           />
-          <span className="font-semibold hidden sm:inline">Handy Construction S.A</span>
+          <span className="font-semibold hidden sm:inline">Grupo Handy</span>
         </Link>
 
         {/* Desktop nav */}
@@ -59,17 +59,13 @@ export default function Header() {
 
         {/* Right actions */}
         <div className="flex items-center gap-2">
-          {/* CTA siempre visible; compacto en móvil */}
           <a href="#cta-final" className="hidden sm:block">
             <Button size="sm">Solicitar evaluación gratis</Button>
           </a>
-
-          {/* WhatsApp solo desktop */}
           <a href={waLink} target="_blank" rel="noopener noreferrer" className="hidden md:block">
             <Button size="sm" variant="outline">WhatsApp</Button>
           </a>
-
-          {/* Hamburguesa en móvil */}
+          {/* Hamburguesa móvil */}
           <button
             aria-label="Abrir menú"
             className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-300"
