@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Download } from "lucide-react";
 import Image from "next/image";
 
 const items = [
@@ -33,14 +33,48 @@ export default function Trainings() {
               </motion.li>
             ))}
           </ul>
-          <a href="/handy/capacitaciones/portada.jpg" download className="inline-block mt-6 text-brand hover:underline">
-            Descargar brochure (placeholder)
+
+          {/* Botón para descargar PDF */}
+          <a
+            href="/docs/capacitaciones.pdf"
+            download
+            className="inline-flex items-center gap-2 mt-6 text-brand hover:underline"
+          >
+            <Download className="w-4 h-4" aria-hidden />
+            Descargar catálogo (PDF)
           </a>
+
+          {/* Avales y licencias */}
+          <div className="mt-8">
+            <div className="text-sm text-slate-600 mb-3 font-medium">Avales y licencias</div>
+            <div className="flex items-center gap-6">
+              <div className="relative w-24 h-12">
+                <Image
+                  src="/logos/minsa.png"
+                  alt="Logo MINSA"
+                  fill
+                  sizes="96px"
+                  className="object-contain"
+                />
+              </div>
+              <div className="relative w-28 h-12">
+                <Image
+                  src="/logos/bomberos.png"
+                  alt="Logo Benemérito Cuerpo de Bomberos"
+                  fill
+                  sizes="112px"
+                  className="object-contain"
+                />
+              </div>
+            </div>
+            <p className="text-xs text-slate-500 mt-2">
+              Empresa e instructores con aval del MINSA y licencia del Benemérito Cuerpo de Bomberos.
+            </p>
+          </div>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}>
-          {/* Marco con relación 4:3 y altura controlada en móvil */}
-          <div className="relative w-full aspect-[4/3] md:aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm max-h-[360px] md:max-h-none">
+          <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm max-h-[360px] md:max-h-none">
             <Image
               src="/handy/capacitaciones/portada.jpg"
               alt="Capacitaciones en Seguridad (SST)"
