@@ -51,9 +51,6 @@ export default function Trainings() {
               priority={false}
             />
           </div>
-          <p className="text-xs text-slate-500 mt-2">
-            Si aún la ves borrosa, sube una imagen de al menos 1600×1200 px en <code>/public/handy/capacitaciones/portada.jpg</code>.
-          </p>
         </motion.div>
       </div>
     </section>
