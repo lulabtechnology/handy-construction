@@ -1,63 +1,92 @@
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import Services from "@/components/Services";
-import HowItWorks from "@/components/HowItWorks";
-import Trainings from "@/components/Trainings";
-import Projects from "@/components/Projects";
-import ContactForm from "@/components/ContactForm";
-import CtaBlock from "@/components/CtaBlock";
-import Footer from "@/components/Footer";
+"use client";
+import { motion } from "framer-motion";
+import { CheckCircle2, Download } from "lucide-react";
+import Image from "next/image";
 
-export default function Page() {
-  const wa = process.env.NEXT_PUBLIC_WHATSAPP || "67563200";
-  const waLink = `https://wa.me/507${wa}?text=Hola%20Handy%20Construction%2C%20quisiera%20una%20evaluaci%C3%B3n%20gratuita`;
+const items = [
+  "Oficiales de seguridad en sitio.",
+  "Planes de prevención de riesgos.",
+  "Consultoría en Seguridad Industrial.",
+  "Programas de manejo de emergencias.",
+  "Capacitaciones SST.",
+  "Simulacros de evacuación.",
+  "Primeros auxilios."
+];
 
-  // correo oficial
-  const email = process.env.CONTACT_TO || "Gerencia@handyconstructionsa.com";
-
+export default function Trainings() {
   return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <Services />
-        <HowItWorks />
-        <Trainings />
-        <Projects />
+    <section id="capacitaciones" className="section">
+      <div className="container-narrow grid md:grid-cols-2 gap-10 items-center">
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}>
+          <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-brand">Capacitaciones en Seguridad</h2>
+          <ul className="space-y-3">
+            {items.map((t, i) => (
+              <motion.li
+                key={t}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.04 }}
+                className="flex items-start gap-3"
+              >
+                <CheckCircle2 className="text-brand mt-0.5" aria-hidden />
+                <span className="text-slate-700">{t}</span>
+              </motion.li>
+            ))}
+          </ul>
 
-        <section id="contacto" className="section">
-          <div className="container-narrow grid md:grid-cols-2 gap-10">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-semibold text-brand">Contáctanos</h2>
-              <p className="mt-3 text-slate-700">
-                Cuéntanos sobre tu proyecto. Respuesta rápida por WhatsApp:{" "}
-                <a className="text-brand hover:underline" href={waLink} target="_blank" rel="noopener noreferrer">
-                  +507 {wa}
-                </a>
-              </p>
-              <div className="mt-6">
-                <ContactForm />
+          {/* Botón para descargar PDF */}
+          <a
+            href="/docs/capacitaciones.pdf"
+            download
+            className="inline-flex items-center gap-2 mt-6 text-brand hover:underline"
+          >
+            <Download className="w-4 h-4" aria-hidden />
+            Descargar catálogo (PDF)
+          </a>
+
+          {/* Avales y licencias */}
+          <div className="mt-8">
+            <div className="text-sm text-slate-600 mb-3 font-medium">Avales y licencias</div>
+            <div className="flex items-center gap-6">
+              <div className="relative w-24 h-12">
+                <Image
+                  src="/logos/minsa.png"
+                  alt="Logo MINSA"
+                  fill
+                  sizes="96px"
+                  className="object-contain"
+                />
+              </div>
+              <div className="relative w-28 h-12">
+                <Image
+                  src="/logos/bomberos.png"
+                  alt="Logo Benemérito Cuerpo de Bomberos"
+                  fill
+                  sizes="112px"
+                  className="object-contain"
+                />
               </div>
             </div>
-            <div className="rounded-2xl border border-slate-200 p-6 bg-slate-50">
-              <h3 className="font-semibold text-slate-800">Handy Construction S.A</h3>
-              <p className="text-sm text-slate-700 mt-2">
-                Diseño, construcción, capacitación y consultoría. Atención en todo Panamá.
-              </p>
-              <ul className="mt-4 text-sm text-slate-700 space-y-2">
-                <li><strong>WhatsApp:</strong> +507 {wa}</li>
-                <li><strong>Email:</strong> {email}</li>
-              </ul>
-              <p className="mt-6 text-xs text-slate-600">
-                Razón social: HANDYCONSTRUCTIONS.A — RUC 1139405-1-569224 DV 40
-              </p>
-            </div>
+            <p className="text-xs text-slate-500 mt-2">
+              Empresa e instructores con aval del MINSA y licencia del Benemérito Cuerpo de Bomberos.
+            </p>
           </div>
-        </section>
+        </motion.div>
 
-        <CtaBlock />
-      </main>
-      <Footer />
-    </>
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}>
+          <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm max-h-[360px] md:max-h-none">
+            <Image
+              src="/handy/capacitaciones/portada.jpg"
+              alt="Capacitaciones en Seguridad (SST)"
+              fill
+              quality={95}
+              sizes="(max-width:768px) 90vw, 50vw"
+              className="object-cover"
+              priority={false}
+            />
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 }
