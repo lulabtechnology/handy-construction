@@ -5,13 +5,13 @@ import { Button } from "./ui/button";
 
 export default function Hero() {
   const wa = process.env.NEXT_PUBLIC_WHATSAPP || "67563200";
-  const waLink = `https://wa.me/507${wa}?text=Hola%20Handy%20Construction%2C%20quisiera%20una%20evaluaci%C3%B3n%20gratuita`;
+  const waLink = `https://wa.me/507${wa}?text=Hola%20Grupo%20Handy%2C%20quisiera%20una%20evaluaci%C3%B3n%20gratuita`;
 
   return (
     <section id="inicio" className="relative min-h-[70vh] md:min-h-[86vh] flex items-center bg-white overflow-hidden">
       <Image
         src="/handy/hero.jpg"
-        alt="Handy Construction — Hero"
+        alt="Grupo Handy — Hero"
         fill
         priority
         quality={92}
@@ -33,7 +33,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.05 }}
           className="mt-4 max-w-2xl text-base md:text-lg text-slate-700"
         >
-          Handy Construction S.A — diseño, construcción, capacitación y consultoría.
+          Grupo Handy — diseño, construcción, capacitación y consultoría.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 12 }}
