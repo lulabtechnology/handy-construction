@@ -19,8 +19,7 @@ const sizes: Record<Size, string> = {
   md: "px-5 py-2.5",
 };
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
   size?: Size;
   className?: string;
@@ -28,11 +27,7 @@ export interface ButtonProps
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "md", ...props }, ref) => (
-    <button
-      ref={ref}
-      className={cx(base, variants[variant], sizes[size], className)}
-      {...props}
-    />
+    <button ref={ref} className={cx(base, variants[variant], sizes[size], className)} {...props} />
   )
 );
 Button.displayName = "Button";
