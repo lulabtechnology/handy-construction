@@ -19,8 +19,8 @@ const services = [
     src: "/handy/servicios/03.jpg",
   },
   {
-    title: "Artículos de aseo y mobiliario",
-    desc: "Provisión integral para tu operación diaria.",
+    title: "Confección de mobiliario",
+    desc: "Confección de Mobilario a medida.",
     src: "/handy/servicios/04.jpg",
   },
   {
