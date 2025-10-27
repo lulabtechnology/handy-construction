@@ -4,18 +4,19 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 
-const nav = [
+const NAV = [
   { href: "#inicio", label: "Inicio" },
   { href: "#servicios", label: "Servicios" },
   { href: "#como-trabajamos", label: "Cómo trabajamos" },
   { href: "#capacitaciones", label: "Capacitaciones" },
   { href: "#proyectos", label: "Proyectos" },
-  { href: "#contacto", label: "Contacto" }
+  { href: "#contacto", label: "Contacto" },
 ];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -27,17 +28,29 @@ export default function Header() {
   const waLink = `https://wa.me/507${wa}?text=Hola%20Handy%20Construction%2C%20quisiera%20una%20evaluaci%C3%B3n%20gratuita`;
 
   return (
-    <header className={`sticky top-0 z-50 transition-all ${scrolled ? "bg-white/90 backdrop-blur border-b border-slate-200" : "bg-transparent"}`}>
+    <header
+      className={`sticky top-0 z-50 transition-all ${
+        scrolled ? "bg-white/90 backdrop-blur border-b border-slate-200" : "bg-white"
+      }`}
+      role="banner"
+    >
       <div className="container-narrow flex items-center justify-between h-16">
         {/* Brand */}
         <Link href="#inicio" className="flex items-center gap-3">
-          <Image src="/handy/logo.png" alt="Handy Group" width={30} height={30} className="rounded" />
+          <Image
+            src="/handy/logo.png"
+            alt="Handy Group"
+            width={32}
+            height={32}
+            className="rounded"
+            priority
+          />
           <span className="font-semibold hidden sm:inline">Handy Construction S.A</span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6">
-          {nav.map((n) => (
+        <nav className="hidden md:flex items-center gap-6" aria-label="Principal">
+          {NAV.map((n) => (
             <a key={n.href} href={n.href} className="text-sm text-slate-700 hover:text-brand">
               {n.label}
             </a>
@@ -45,18 +58,18 @@ export default function Header() {
         </nav>
 
         {/* Right actions */}
-        <div className="flex items-center gap-3">
-          {/* CTA visible siempre; más compacto en móvil */}
+        <div className="flex items-center gap-2">
+          {/* CTA siempre visible; compacto en móvil */}
           <a href="#cta-final" className="hidden sm:block">
             <Button size="sm">Solicitar evaluación gratis</Button>
           </a>
 
-          {/* WhatsApp sólo desktop */}
+          {/* WhatsApp solo desktop */}
           <a href={waLink} target="_blank" rel="noopener noreferrer" className="hidden md:block">
             <Button size="sm" variant="outline">WhatsApp</Button>
           </a>
 
-          {/* Hamburger sólo móvil */}
+          {/* Hamburguesa en móvil */}
           <button
             aria-label="Abrir menú"
             className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-300"
@@ -72,11 +85,11 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile panel */}
+      {/* Panel móvil */}
       {open && (
         <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur">
           <div className="container-narrow py-3 flex flex-col gap-1">
-            {nav.map((n) => (
+            {NAV.map((n) => (
               <a
                 key={n.href}
                 href={n.href}
@@ -86,9 +99,9 @@ export default function Header() {
                 {n.label}
               </a>
             ))}
-            <div className="pt-2 flex gap-3">
+            <div className="pt-2 grid grid-cols-2 gap-3">
               <a href="#cta-final" onClick={() => setOpen(false)}>
-                <Button size="sm" className="w-full">Solicitar evaluación gratis</Button>
+                <Button size="sm" className="w-full">Evaluación gratis</Button>
               </a>
               <a href={waLink} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
                 <Button size="sm" variant="outline" className="w-full">WhatsApp</Button>
