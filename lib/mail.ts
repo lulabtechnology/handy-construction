@@ -3,7 +3,8 @@ import nodemailer from "nodemailer";
 import type { ContactPayload } from "./validations";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const CONTACT_TO = process.env.CONTACT_TO || "mi-correo@dominio.com";
+// si no pones CONTACT_TO en el env, enviará a esta dirección por defecto:
+const CONTACT_TO = process.env.CONTACT_TO || "Gerencia@handyconstructionsa.com";
 
 export async function sendContactEmail(data: ContactPayload) {
   const subject = `Nueva consulta — Handy Construction S.A (${data.name})`;
