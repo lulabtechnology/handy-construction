@@ -35,20 +35,11 @@ export default function Header() {
       role="banner"
     >
       <div className="container-narrow flex items-center justify-between h-16">
-        {/* Brand */}
         <Link href="#inicio" className="flex items-center gap-3">
-          <Image
-            src="/handy/logo.png"
-            alt="Grupo Handy"
-            width={32}
-            height={32}
-            className="rounded"
-            priority
-          />
+          <Image src="/handy/logo.png" alt="Grupo Handy" width={32} height={32} className="rounded" priority />
           <span className="font-semibold hidden sm:inline">Grupo Handy</span>
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6" aria-label="Principal">
           {NAV.map((n) => (
             <a key={n.href} href={n.href} className="text-sm text-slate-700 hover:text-brand">
@@ -57,7 +48,6 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Right actions */}
         <div className="flex items-center gap-2">
           <a href="#cta-final" className="hidden sm:block">
             <Button size="sm">Solicitar evaluación gratis</Button>
@@ -65,7 +55,6 @@ export default function Header() {
           <a href={waLink} target="_blank" rel="noopener noreferrer" className="hidden md:block">
             <Button size="sm" variant="outline">WhatsApp</Button>
           </a>
-          {/* Hamburguesa móvil */}
           <button
             aria-label="Abrir menú"
             className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-300"
@@ -81,7 +70,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Panel móvil */}
       {open && (
         <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur">
           <div className="container-narrow py-3 flex flex-col gap-1">
