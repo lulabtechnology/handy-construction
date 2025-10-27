@@ -15,7 +15,7 @@ const items = [
 
 export default function Trainings() {
   return (
-    <section id="capacitaciones" className="section">
+    <section className="section">
       <div className="container-narrow grid md:grid-cols-2 gap-10 items-center">
         <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}>
           <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-brand">Capacitaciones en Seguridad</h2>
@@ -34,7 +34,7 @@ export default function Trainings() {
             ))}
           </ul>
 
-          {/* Botón para descargar PDF */}
+          {/* Descarga PDF */}
           <a
             href="/docs/capacitaciones.pdf"
             download
@@ -49,22 +49,10 @@ export default function Trainings() {
             <div className="text-sm text-slate-600 mb-3 font-medium">Avales y licencias</div>
             <div className="flex items-center gap-6">
               <div className="relative w-24 h-12">
-                <Image
-                  src="/logos/minsa.png"
-                  alt="Logo MINSA"
-                  fill
-                  sizes="96px"
-                  className="object-contain"
-                />
+                <Image src="/logos/minsa.png" alt="Logo MINSA" fill sizes="96px" className="object-contain" />
               </div>
               <div className="relative w-28 h-12">
-                <Image
-                  src="/logos/bomberos.png"
-                  alt="Logo Benemérito Cuerpo de Bomberos"
-                  fill
-                  sizes="112px"
-                  className="object-contain"
-                />
+                <Image src="/logos/bomberos.png" alt="Logo Benemérito Cuerpo de Bomberos" fill sizes="112px" className="object-contain" />
               </div>
             </div>
             <p className="text-xs text-slate-500 mt-2">
