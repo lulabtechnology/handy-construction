@@ -1,18 +1,24 @@
+"use client";
 import { Button } from "./ui/button";
+import { getWhatsapp } from "../lib/whats";
+import { motion } from "framer-motion";
 
 export default function CtaBlock() {
-  const wa = process.env.NEXT_PUBLIC_WHATSAPP || "67563200";
-  const waLink = `https://wa.me/507${wa}?text=Hola%20Grupo%20Handy%2C%20quisiera%20una%20evaluaci%C3%B3n%20gratuita`;
+  const wa = getWhatsapp();
 
   return (
-    <section className="py-16 bg-slate-50 border-t border-slate-200">
+    <section id="cta-final" className="py-16 bg-slate-50 border-t border-slate-200">
       <div className="container-narrow text-center">
-        <h3 className="text-2xl md:text-3xl font-semibold text-slate-800">
+        <motion.h3
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-2xl md:text-3xl font-semibold text-slate-800"
+        >
           ¿Listo para iniciar? Hablemos de tu proyecto.
-        </h3>
+        </motion.h3>
         <div className="mt-6 flex justify-center gap-3">
           <a href="#contacto"><Button>Solicitar evaluación gratis</Button></a>
-          <a href={waLink} target="_blank" rel="noopener noreferrer">
+          <a href={wa.link} target="_blank" rel="noopener noreferrer">
             <Button variant="outline">WhatsApp</Button>
           </a>
         </div>
