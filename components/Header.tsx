@@ -15,6 +15,7 @@ const nav = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -28,10 +29,13 @@ export default function Header() {
   return (
     <header className={`sticky top-0 z-50 transition-all ${scrolled ? "bg-white/90 backdrop-blur border-b border-slate-200" : "bg-transparent"}`}>
       <div className="container-narrow flex items-center justify-between h-16">
+        {/* Brand */}
         <Link href="#inicio" className="flex items-center gap-3">
-          <Image src="/handy/logo.png" alt="Handy Construction S.A" width={36} height={36} className="rounded" />
-          <span className="font-semibold">Handy Construction S.A</span>
+          <Image src="/handy/logo.png" alt="Handy Group" width={30} height={30} className="rounded" />
+          <span className="font-semibold hidden sm:inline">Handy Construction S.A</span>
         </Link>
+
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
           {nav.map((n) => (
             <a key={n.href} href={n.href} className="text-sm text-slate-700 hover:text-brand">
@@ -39,15 +43,60 @@ export default function Header() {
             </a>
           ))}
         </nav>
+
+        {/* Right actions */}
         <div className="flex items-center gap-3">
-          <a href={waLink} target="_blank" rel="noopener noreferrer">
-            <Button variant="outline">WhatsApp</Button>
+          {/* CTA visible siempre; más compacto en móvil */}
+          <a href="#cta-final" className="hidden sm:block">
+            <Button size="sm">Solicitar evaluación gratis</Button>
           </a>
-          <a href="#cta-final">
-            <Button>Solicitar evaluación gratis</Button>
+
+          {/* WhatsApp sólo desktop */}
+          <a href={waLink} target="_blank" rel="noopener noreferrer" className="hidden md:block">
+            <Button size="sm" variant="outline">WhatsApp</Button>
           </a>
+
+          {/* Hamburger sólo móvil */}
+          <button
+            aria-label="Abrir menú"
+            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-300"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="sr-only">Abrir menú</span>
+            <div className="space-y-1.5">
+              <span className="block w-5 h-0.5 bg-slate-800"></span>
+              <span className="block w-5 h-0.5 bg-slate-800"></span>
+              <span className="block w-5 h-0.5 bg-slate-800"></span>
+            </div>
+          </button>
         </div>
       </div>
+
+      {/* Mobile panel */}
+      {open && (
+        <div className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur">
+          <div className="container-narrow py-3 flex flex-col gap-1">
+            {nav.map((n) => (
+              <a
+                key={n.href}
+                href={n.href}
+                className="py-2 text-slate-800 hover:text-brand"
+                onClick={() => setOpen(false)}
+              >
+                {n.label}
+              </a>
+            ))}
+            <div className="pt-2 flex gap-3">
+              <a href="#cta-final" onClick={() => setOpen(false)}>
+                <Button size="sm" className="w-full">Solicitar evaluación gratis</Button>
+              </a>
+              <a href={waLink} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
+                <Button size="sm" variant="outline" className="w-full">WhatsApp</Button>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
