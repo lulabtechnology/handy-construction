@@ -56,7 +56,7 @@ export default function Trainings() {
               </div>
             </div>
             <p className="text-xs text-slate-500 mt-2">
-              Empresa e instructores con aval del MINSA y licencia del Benemérito Cuerpo de Bomberos.
+              Empresa e instructores con Aval del MINSA y Licencia del Benemérito Cuerpo de Bomberos.
             </p>
           </div>
         </motion.div>
