@@ -34,16 +34,18 @@ export default function Trainings() {
             ))}
           </ul>
           <a href="/handy/capacitaciones/portada.jpg" download className="inline-block mt-6 text-brand hover:underline">
-            Descargar brochure (PDF/Imagen - placeholder)
+            Descargar brochure (placeholder)
           </a>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}>
-          <div className="relative w-full h-72 md:h-96 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+          <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
             <Image
               src="/handy/capacitaciones/portada.jpg"
-              alt="Capacitaciones en Seguridad"
+              alt="Capacitaciones en Seguridad (SST)"
               fill
+              priority={false}
+              quality={92}
               sizes="(max-width:768px) 100vw, 50vw"
               className="object-cover"
             />
