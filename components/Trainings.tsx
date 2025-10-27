@@ -39,17 +39,21 @@ export default function Trainings() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}>
-          <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+          {/* Marco con relación 4:3 y altura controlada en móvil */}
+          <div className="relative w-full aspect-[4/3] md:aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm max-h-[360px] md:max-h-none">
             <Image
               src="/handy/capacitaciones/portada.jpg"
               alt="Capacitaciones en Seguridad (SST)"
               fill
-              priority={false}
-              quality={92}
-              sizes="(max-width:768px) 100vw, 50vw"
+              quality={95}
+              sizes="(max-width:768px) 90vw, 50vw"
               className="object-cover"
+              priority={false}
             />
           </div>
+          <p className="text-xs text-slate-500 mt-2">
+            Si aún la ves borrosa, sube una imagen de al menos 1600×1200 px en <code>/public/handy/capacitaciones/portada.jpg</code>.
+          </p>
         </motion.div>
       </div>
     </section>
