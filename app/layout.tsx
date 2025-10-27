@@ -6,18 +6,18 @@ export const metadata: Metadata = {
   title: "Grupo Handy — Diseño, construcción, capacitación y consultoría",
   description:
     "CONSTRUYENDO EL FUTURO, PROTEGIENDO EL PRESENTE. Servicios profesionales en ingeniería, carpintería, suministros y seguridad laboral.",
-  metadataBase: new URL("https://handy-construction.example.com"),
+  metadataBase: new URL("https://handy-construction.vercel.app"),
   openGraph: {
     title: "Grupo Handy",
     description: "Diseño, construcción, capacitación y consultoría.",
-    url: "https://handy-construction.example.com",
+    url: "https://handy-construction.vercel.app",
     siteName: "Grupo Handy",
     images: [{ url: "/handy/hero.jpg", width: 1200, height: 630 }],
     locale: "es_PA",
     type: "website",
   },
   alternates: { canonical: "/" },
-  icons: { icon: "/handy/logo.png" }
+  icons: { icon: "/handy/logo.png" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
