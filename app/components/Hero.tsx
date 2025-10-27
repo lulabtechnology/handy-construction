@@ -2,10 +2,10 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
+import { getWhatsapp } from "../lib/whats";
 
 export default function Hero() {
-  const wa = process.env.NEXT_PUBLIC_WHATSAPP || "67563200";
-  const waLink = `https://wa.me/507${wa}?text=Hola%20Grupo%20Handy%2C%20quisiera%20una%20evaluaci%C3%B3n%20gratuita`;
+  const wa = getWhatsapp();
 
   return (
     <section id="inicio" className="relative min-h-[70vh] md:min-h-[86vh] flex items-center bg-white overflow-hidden">
@@ -41,7 +41,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-6 flex gap-3"
         >
-          <a href={waLink} target="_blank" rel="noopener noreferrer">
+          <a href={wa.link} target="_blank" rel="noopener noreferrer">
             <Button size="sm">WhatsApp</Button>
           </a>
           <a href="#contacto">
